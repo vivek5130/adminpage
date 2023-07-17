@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .head{
+            margin-top:30px;
+            text-align: center;
+            font-size:35px;
+            color:red;
+        }
+        #inp{
+            border-radius: 5px 4px;
+            border-width: 1px;
+            outline:none;
+            margin-top:auto;
+            margin-bottom:auto;
+            margin-left: 35%;
+            /* margin-right:auto; */
+            width: 30%;
+            /* margin-right:3px; */
+            height:32px;
+            font-size:21px;
+        }
+        #btn{
+            
+            /* position:relative; */
+            /* border-radius: 50%; */
+            /* display:flex; */
+            background-color: transparent;
+            height: 40px;
+            border-width: 0px;
+            margin-top:5px;
+            border-radius:50%;
+            outline: none;
+        }
+        #tick{
+            widht: 35px;
+            height: 35px;
+        }
+        #btn:hover{
+            /* border-width: 2px; */
+            background-color: orange;
+            
+        }
+        
+        #main{
+            /* background-color: white; */
+            height:40px;
+            display: flex;
+            
+            
+            margin-left:auto;
+            margin-right:auto;
+        }
+        #uli{
+           list-style: none;
+           
+        }
+        #cont{
+            margin-left:35%;
+        }
+        #uli li{
+            font-size: 23px;
+            color: hwb(113 3% 53%);
+            width: 100%;
+        }
+        .delbtn{
+            /* size:10px; */
+            border-width: 0px;
+            display:inline-block;
+            outline:none;
+            background-color: transparent;
+            margin-top: 12px;
+            
+            /* margin-left:80%; */
+        }
+        #uli li div{
+            display: inline;
+            /* display:inline-block; */
+            width: 60%;
+            background-color: transparent;
+            text-overflow: auto;
+            margin-left:auto;
+            margin-right:auto;
+
+         } 
+         #uli li button{
+           /* margin-left: 70%; */
+           /* border: 1px black solid; */
+           background-color: transparent;
+           border-radius: 50%;
+           /* outline:none; */
+           border: none;
+           /* position: fixed; */
+          
+         }
+         .str{
+            border-radius: 30px;
+            border: 1px black solid;
+            /* border: 1px black solid; */
+         }
+         .strimg{
+            width: 20px;
+            alt : "strike";
+         }
+         .delimg{
+            width: 20px;
+            alt : "delete";
+         }
+         #uli li button:hover{
+            background-color: orange;
+         }
+    </style> 
+</head>
+<body style="background-image: linear-gradient(rgb(255, 152, 8),yellow, rgb(233, 233, 45),rgba(180, 232, 39, 0.868)); background-repeat: no-repeat;background-attachment: fixed;;">
+    <div class = "head">To do list</div>
+    <div id="main">
+        <input id = "inp" type="text" autofocus placeholder="Enter your To do list here">
+        <button id="btn"  > <img id="tick" src="check-mark.png", width= 25/></button>
+    </div>
+    <div id="cont">
+        <ul id="uli">
+          
+        </ul>
+    </div>
+</body>
+<script>
+    var btn = document.getElementById('btn')
+    var uli = document.getElementById('uli')
+    var inp  =document.getElementById('inp')
+    var delbtn = document.getElementsByClassName('delbtn')
+    var count = 1
+    btn.addEventListener("click",function()
+    {
+        if(inp.value != "")
+        {
+        var l = document.createElement("li")
+        var p = document.createElement('div')
+        p.innerHTML= inp.value
+        l.appendChild(p)
+        uli.appendChild(l)
+        var del = document.createElement('BUTTON')
+        var str = document.createElement('BUTTON')
+        str.setAttribute('class', "str")
+        // var t = document.createTextNode("Strike")
+        var strimg = document.createElement('img');
+        strimg.setAttribute('class', 'strimg')
+        strimg.setAttribute('alt', "Strike")
+        strimg.src = "icons8-done-64.png"
+        str.append(strimg)
+        l.append(str)
+        del.setAttribute('id', 'delbtn' + count);
+        del.setAttribute('class', 'delbtn');
+        del.style.outline = "none";
+        count++;
+        var delimg = document.createElement('img');
+        delimg.src = "icons8-trash-24.png";
+        delimg.setAttribute('class', 'delimg')
+        delimg.setAttribute('alt', 'Delete')
+        del.appendChild(delimg)
+        l.appendChild(del)
+        uli.appendChild(l)
+        inp.value = ""
+        }
+       
+        del.addEventListener("click", function(){
+        // var i = del.parentElement;
+        // l.style.color =cyan;
+        // l.style.backgroundColor = 'red';
+        // l.style.display = 'none'
+        l.remove();
+        
+    })
+    str.addEventListener('click',function(){
+           
+            if( l.style.textDecoration == 'line-through'){
+                l.style.textDecoration = 'none'
+                // str.innerText = ""
+                // var st = document.createTextNode("strike")
+                // str.appendChild(st)
+                strimg.src = "icons8-done-64.png"
+                strimg.style.width= "20px";
+            } else{
+                l.style.textDecoration = 'line-through'
+                // var unst = document.createTextNode("unstrike")
+                // str.innerText = ""
+                // str.appendChild(unst)
+                strimg.src = "icons8-undo-26.png"
+                strimg.style.width= "16px";
+            }
+        })
+    })
+    inp.addEventListener('keydown', (event)=>
+    {
+        if(event.keyCode == 13) {
+            if(inp.value != "")
+        {
+        var l = document.createElement("li")
+        var p = document.createElement('div')
+        p.innerHTML= inp.value
+        l.appendChild(p)
+        uli.appendChild(l)
+        var del = document.createElement('BUTTON')
+        var str = document.createElement('BUTTON')
+        str.setAttribute('class', "str")
+        // var t = document.createTextNode("Strike")
+        var strimg = document.createElement('img');
+        strimg.setAttribute('class', 'strimg')
+        strimg.setAttribute('alt', "Strike")
+        strimg.src = "icons8-done-64.png"
+        str.append(strimg)
+        l.append(str)
+        del.setAttribute('id', 'delbtn' + count);
+        del.setAttribute('class', 'delbtn');
+        del.style.outline = "none";
+        count++;
+        var delimg = document.createElement('img');
+        delimg.src = "icons8-trash-24.png";
+        delimg.setAttribute('class', 'delimg')
+        delimg.setAttribute('alt', 'Delete')
+        del.appendChild(delimg)
+        l.appendChild(del)
+        uli.appendChild(l)
+        inp.value = ""
+        }
+       
+        del.addEventListener("click", function(){
+        // var i = del.parentElement;
+        // l.style.color =cyan;
+        // l.style.backgroundColor = 'red';
+        // l.style.display = 'none'
+        l.remove();
+        
+    })
+    str.addEventListener('click',function(){
+           
+            if( l.style.textDecoration == 'line-through'){
+                l.style.textDecoration = 'none'
+                // str.innerText = ""
+                // var st = document.createTextNode("strike")
+                // str.appendChild(st)
+                strimg.src = "icons8-done-64.png"
+                strimg.style.width= "20px";
+            } else{
+                l.style.textDecoration = 'line-through'
+                // var unst = document.createTextNode("unstrike")
+                // str.innerText = ""
+                // str.appendChild(unst)
+                strimg.src = "icons8-undo-26.png"
+                strimg.style.width= "16px";
+            }
+        })
+        }
+    })
+</script>
